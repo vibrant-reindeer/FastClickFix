@@ -15,8 +15,14 @@ namespace FastClickFix
 
         public static int PollEventWrapper(out Sdl.Event ev)
         {
-            staticMonitor?.Log("Hi, this is the PollEvent wrapper #2");
+            // staticMonitor?.Log("Hi, this is the PollEvent wrapper #2");
             int retVal = originalPollEvent!(out ev);
+
+            if(ev.Type == (Sdl.EventType)1025u)
+            {
+                staticMonitor?.Log("Intercepted a MouseButtonDown event!");
+            }
+
             return retVal;
         }
 
@@ -32,7 +38,7 @@ namespace FastClickFix
             // Harmony harmony = new(ModManifest.UniqueID);
 
             // Sdl.PollEvent is a delegate so we have to wrap it.
-            originalPollEvent = (Sdl.d_sdl_pollevent)(AccessTools.Field("Sdl:PollEvent").GetValue(null) ?? throw new Exception("Sdl:PollEvent not found"));
+            originalPollEvent = Sdl.PollEvent;
             staticMonitor?.Log($"originalPollEvent = '{originalPollEvent}'");
             Sdl.PollEvent = PollEventWrapper;
 
