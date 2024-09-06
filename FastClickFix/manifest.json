@@ -1,0 +1,10 @@
+{
+    "Name": "FastClickFix",
+    "Author": "vibrant-reindeer",
+    "Version": "1.0.0",
+    "Description": "Fixes very short mouse clicks being ignored.",
+    "UniqueID": "vibrantreindeer.ClickMissFix",
+    "EntryDll": "FastClickFix.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": []
+  }
